@@ -3,10 +3,10 @@ services:
   web:
     build: ./django
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
-    # expose:
-    #   - 8000
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
+    # ports:
+    #   - 8000:8000
     volumes:
       - static:/home/app/web/static
       - media:/home/app/web/media
@@ -20,15 +20,15 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./postgresql/.env.prod
-  # nginx:
-  #   build: ./nginx
-  #   volumes:
-  #     - static:/home/app/web/static
-  #     - media:/home/app/web/media
-  #   ports:
-  #     - 1337:80
-  #   depends_on:
-  #     - web
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/home/app/web/static
+      - media:/home/app/web/media
+    ports:
+      - 1337:80
+    depends_on:
+      - web
 volumes:
   postgres_data:
   static:
