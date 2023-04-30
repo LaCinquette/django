@@ -1,4 +1,4 @@
-#!/home/lacinquette/ITMO/diploma/final/prod/django/.venv/bin/python
+#!/home/lacinquette/ITMO/diploma/final_test/django/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
