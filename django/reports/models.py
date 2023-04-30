@@ -9,14 +9,14 @@ from django.contrib.auth.models import User
 
 class Report(models.Model):
     owner          = models.ForeignKey(User, on_delete=models.CASCADE)
-    title          = models.CharField(max_length=256, blank=False)
-    cwe            = models.IntegerField(blank=False)
-    description    = models.TextField(blank=False)
-    software       = models.ForeignKey(Software, on_delete=models.PROTECT, unique=False, blank=False)
-    environments   = models.ManyToManyField(Environment)
-    exploitability = models.PositiveSmallIntegerField(default=10, validators=[MinValueValidator(0), MaxValueValidator(10)])
-    danger         = models.PositiveSmallIntegerField(default=10, validators=[MinValueValidator(0), MaxValueValidator(10)])
-    exploitation   = models.TextField(blank=False, default='Нет')
+    title          = models.CharField(max_length=256, blank=False, verbose_name="Название")
+    cwe            = models.IntegerField(blank=False, verbose_name="Номер CWE")
+    description    = models.TextField(blank=False, verbose_name="Описание")
+    software       = models.ForeignKey(Software, on_delete=models.PROTECT, unique=False, blank=False, verbose_name="ПО")
+    environments   = models.ManyToManyField(Environment, verbose_name="Среды исполнения")
+    exploitability = models.PositiveSmallIntegerField(default=10, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name="Эксплуатабельность")
+    danger         = models.PositiveSmallIntegerField(default=10, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name="Опасность")
+    exploitation   = models.TextField(blank=False, default='Нет', verbose_name="Способ эксплуатации")
     created        = models.DateTimeField(auto_now_add=True)
     updated        = models.DateTimeField(auto_now=True)
 
@@ -25,8 +25,8 @@ class Report(models.Model):
 
 class InputFiles(models.Model):
     report    = models.ForeignKey(Report, on_delete=models.CASCADE, unique=False)
-    upload    = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    upload    = models.FileField(upload_to='uploads/%Y/%m/%d/', verbose_name="Файлы входных данных")
 
 class DumpFiles(models.Model):
     report    = models.ForeignKey(Report, on_delete=models.CASCADE, unique=False)
-    upload    = models.FileField(upload_to='uploads/%Y/%m/%d/')
+    upload    = models.FileField(upload_to='uploads/%Y/%m/%d/', verbose_name="Файлы дампа памяти")

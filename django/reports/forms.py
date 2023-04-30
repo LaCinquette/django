@@ -13,8 +13,8 @@ class ReportForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReportForm, self).__init__(*args, **kwargs)
-        self.fields['environments'] = forms.ModelMultipleChoiceField(queryset=Environment.objects.all())
-        self.fields['software'] = forms.ModelChoiceField(queryset=Software.objects.all(), widget=forms.NumberInput)
+        self.fields['environments'] = forms.ModelMultipleChoiceField(queryset=Environment.objects.all(), label = "Среды выполнения")
+        self.fields['software'] = forms.ModelChoiceField(queryset=Software.objects.all(), widget=forms.NumberInput, label = "ПО")
         # self.fields['software'].widget.choices = []
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
@@ -43,13 +43,13 @@ InputFilesFormSet = forms.inlineformset_factory(Report, InputFiles, form=InputFi
 DumpFilesFormSet = forms.inlineformset_factory(Report, DumpFiles, form=DumpFilesForm, extra=1, can_delete=True, can_delete_extra=True)
 
 class SearchForm(forms.Form):
-    title               = forms.CharField(strip=True, required=False)
-    cwe                 = forms.IntegerField(required=False)
-    software            = forms.IntegerField(required=False)
-    exploitability_from = forms.IntegerField(label="Exploitability from", initial=1, min_value=0, max_value=10, required=False)
-    exploitability_to   = forms.IntegerField(label="Exploitability to", initial=10, min_value=0, max_value=10, required=False)
-    danger_from         = forms.IntegerField(label="Danger from", initial=1, min_value=0, max_value=10, required=False)
-    danger_to           = forms.IntegerField(label="Danger to", initial=10, min_value=0, max_value=10, required=False)
+    title               = forms.CharField(strip=True, required=False, label="Название")
+    cwe                 = forms.IntegerField(required=False, label="Номер CWE")
+    software            = forms.IntegerField(required=False, label="ПО")
+    exploitability_from = forms.IntegerField(initial=1, min_value=0, max_value=10, required=False, label="Экслуатабельность (от)")
+    exploitability_to   = forms.IntegerField(initial=10, min_value=0, max_value=10, required=False, label="Экслуатабельность (до)")
+    danger_from         = forms.IntegerField(initial=1, min_value=0, max_value=10, required=False, label="Опасность (от)")
+    danger_to           = forms.IntegerField(initial=10, min_value=0, max_value=10, required=False, label="Опасность (до)")
 
     def __init__(self, *args, **kwargs):
         super(SearchForm, self).__init__(*args, **kwargs)
@@ -66,9 +66,9 @@ class SearchForm(forms.Form):
         danger_to = cleaned_data.get("danger_to")
 
         if (exploitability_from > exploitability_to):
-            raise forms.ValidationError(_("Exploitability to can't be lower than exploitability from!"))
+            raise forms.ValidationError(_("Эксплуатабельность (до) не может быть больше эксплуатабельности (после)!"))
         
         if (danger_from > danger_to):
-            raise forms.ValidationError(_("Danger to can't be lower than danger from!"))
+            raise forms.ValidationError(_("Опасность (до) не может быть больше опасность (после)!"))
 
         return cleaned_data

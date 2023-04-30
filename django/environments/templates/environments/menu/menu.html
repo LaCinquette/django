@@ -1,0 +1,16 @@
+{% extends 'environments/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-content-center">
+    <div class="row border border-primary rounded m-3 p-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'new_environment' %}">Создать</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'all_environments' %}">Смотреть все</a>
+            </li>
+          </ul>
+    </div>
+</div>
+{% endblock %}

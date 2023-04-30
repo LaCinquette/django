@@ -3,7 +3,7 @@
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
-        <h1>All software</h1>
+        <h1>ПО (все):</h1>
         <div class="list-group">
             {% for software in object_list %}
                 <a href="{% url 'software' software_id=software.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -11,10 +11,10 @@
                       <h5 class="mb-1">{{ software.title }}</h5>
                       <small class="text-muted">{{ software.get_category_display }}</small>
                     </div>
-                    <label class="text-muted" for="version{{ software.id }}">Version:</label>
+                    <label class="text-muted" for="version{{ software.id }}">Версия:</label>
                     <p class="mb-1" id="version{{ software.id }}">{{ software.version }}</p>
                     <div class="d-flex w-100 justify-content-between">
-                        <label class="mb-1" for="buildOptions{{ software.id }}">Build options:</label>
+                        <label class="mb-1" for="buildOptions{{ software.id }}">Опции сборки:</label>
                         <small class="text-muted" id="buildOptions{{ software.id }}">{{ software.build_options }}</small>
                     </div>
                 </a>
@@ -38,7 +38,7 @@
                     </li>
                     {% endif %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Предыдущая</a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="page-item disabled">
-                        <a class="page-link" href="?page=1" tabindex="-1">Previous</a>
+                        <a class="page-link" href="?page=1" tabindex="-1">Предыдущая</a>
                     </li>
                     {% endif %}
 
@@ -57,7 +57,7 @@
 
                     {% if page_obj.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
                     </li>
                     {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
                     <li class="page-item">
@@ -74,7 +74,7 @@
                     {% endif %}
                     {% else %}
                     <li class="page-item disabled">
-                        <a class="page-link" href="?page={{ page_obj.number }}">Next</a>
+                        <a class="page-link" href="?page={{ page_obj.number }}">Следующая</a>
                     </li>
                     <li class="page-item disabled">
                         <a class="page-link" href="?page={{ page_obj.number }}" aria-label="Last">

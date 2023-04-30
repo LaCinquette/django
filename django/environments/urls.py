@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:environment_id>', views.DetailEnvironment.as_view(), name='environment'),
     path('update/<int:environment_id>', views.EnvironmentUpdate.as_view(), name='environment_update'),
     path('delete/<int:environment_id>', views.EnvironmentDelete.as_view(), name='environment_delete'),
+    path('', views.EnvironmentsMenu.as_view(), name='environments_menu'),
 ]

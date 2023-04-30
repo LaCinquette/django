@@ -3,13 +3,14 @@
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
-        <h1>Environment id: {{ environment.id  }}</h1>
+        <h1>Среда исполнения №{{ environment.id  }}</h1>
         <div class="container w-100">
             <a href="{% url 'environment' environment_id=environment.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">{{ environment.get_os_display}}</h5>
-                  <small class="text-muted">{{ environment.version }}</small>
                 </div>
+                <label class="text-muted" for="version{{ environment.version }}">Версия:</label>
+                <p class="mb-1" id="version{{ environment.version }}">{{ environment.version }}</p>
             </a>
             {% if request.user == environment.owner or request.user.is_staff %}
             <div class="btn-group mt-3">

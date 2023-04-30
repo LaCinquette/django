@@ -5,7 +5,7 @@
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
-        <h1>Results:</h1>
+        <h1>Результаты поиска:</h1>
         {% if messages %}
         <ul class="alert alert-danger" style="list-style: none;">
             {% for message in messages %}
@@ -14,13 +14,13 @@
         </ul>
         {% endif %}
         {% if params == False %}
-        <p>Please enter at least one parameter!</p>
+        <p>Пожалуйста введите хотя бы один параметр!</p>
         {% endif %}
         {% if not object_list %}
         <div class="list-group">
-            <p>No results!</p>
+            <p>Нет результатов!</p>
             <a href="{% url 'search' %}">
-                Go back
+                Назад
             </a>
         </div>
         {% endif %}
@@ -31,14 +31,14 @@
                       <h5 class="mb-1">{{ report.title }}</h5>
                       <small class="text-muted">CWE-{{ report.cwe }}</small>
                     </div>
-                    <label class="text-muted" for="description{{ report.id }}">Description:</label>
+                    <label class="text-muted" for="description{{ report.id }}">Описание:</label>
                     <p class="mb-1" id="description{{ report.id }}">{{ report.description|truncatewords:20 }}</p>
                     <div class="d-flex w-100 justify-content-start">
-                        <label class="pr-3" for="Danger{{ report.id }}" style="margin-right: 1rem;">Danger:</label>
+                        <label class="pr-3" for="Danger{{ report.id }}" style="margin-right: 1rem;">Опасность:</label>
                         <span class="text-primary font-weight-bold" id="Danger{{ report.id }}">{{ report.danger }}</span>
                     </div>
                     <div class="d-flex w-100 justify-content-start">
-                        <label class="pr-3" for="exploitability{{ report.id }}" style="margin-right: 1rem;">Exploitability:</label>
+                        <label class="pr-3" for="exploitability{{ report.id }}" style="margin-right: 1rem;">Эксплуатабельность:</label>
                         <span class="text-primary font-weight-bold" id="exploitability{{ report.id }}">{{ report.exploitability }}</span>
                     </div>
                 </a>
@@ -63,7 +63,7 @@
                     </li>
                     {% endif %}
                     <li class="page-item">
-                        <a class="page-link" href="{% param_replace page=page_obj.previous_page_number %}" tabindex="-1">Previous</a>
+                        <a class="page-link" href="{% param_replace page=page_obj.previous_page_number %}" tabindex="-1">Предыдущая</a>
                     </li>
                     {% else %}
                     <li class="page-item disabled">
@@ -72,7 +72,7 @@
                         </a>
                     </li>
                     <li class="page-item disabled">
-                        <a class="page-link" href="{% param_replace page=1 %}" tabindex="-1">Previous</a>
+                        <a class="page-link" href="{% param_replace page=1 %}" tabindex="-1">Предыдущая</a>
                     </li>
                     {% endif %}
 
@@ -82,7 +82,7 @@
 
                     {% if page_obj.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="{% param_replace page=page_obj.next_page_number %}">Next</a>
+                        <a class="page-link" href="{% param_replace page=page_obj.next_page_number %}">Следующая</a>
                     </li>
                     {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
                     <li class="page-item">
@@ -99,7 +99,7 @@
                     {% endif %}
                     {% else %}
                     <li class="page-item disabled">
-                        <a class="page-link" href="{% param_replace page=page_obj.number %}">Next</a>
+                        <a class="page-link" href="{% param_replace page=page_obj.number %}">Следующая</a>
                     </li>
                     <li class="page-item disabled">
                         <a class="page-link" href="{% param_replace page=page_obj.number %}" aria-label="Last">

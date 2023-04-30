@@ -9,4 +9,5 @@ urlpatterns = [
     path('delete/<int:report_id>', views.ReportDelete.as_view(), name='report_delete'),
     path('search', views.SearchView.as_view(), name='search'),
     path('search/results', views.SearchResultsList.as_view(), name='results'),
+    path('', views.ReportsMenu.as_view(), name='reports_menu'),
 ]

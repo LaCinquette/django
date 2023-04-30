@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:software_id>', views.DetailSoftware.as_view(), name='software'),
     path('update/<int:software_id>', views.SoftwareUpdate.as_view(), name='software_update'),
     path('delete/<int:software_id>', views.SoftwareDelete.as_view(), name='software_delete'),
+    path('', views.SoftwareMenu.as_view(), name='software_menu'),
 ]

@@ -3,6 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic import TemplateView
 from .models import Report, InputFiles, DumpFiles
 from .forms import ReportForm, InputFilesFormSet, DumpFilesFormSet, SearchForm
 from django.contrib import messages
@@ -10,6 +11,8 @@ from django.db import IntegrityError, transaction
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+class ReportsMenu(TemplateView):
+    template_name = "reports/menu/menu.html"
 
 class ReportCreate(CreateView):
     model = Report
@@ -236,34 +239,26 @@ class SearchResultsList(ListView):
 
         # By Title
         if query_dict.get('title', None):
-            print("Title:", query_dict['title'])
             object_list = object_list.filter(title__icontains=query_dict['title'])
 
         # By CWE
         if query_dict.get('cwe', None):
-            print("CWE:", query_dict['cwe'])
-            print("CWE:", query_dict['cwe'])
             object_list = object_list.filter(cwe__exact=query_dict['cwe'])
 
         # By Software
         if query_dict.get('software', None):
-            print("Software:", query_dict['software'])
             object_list = object_list.filter(software__exact=query_dict['software'])
 
         # By Exploitability
         if query_dict.get('exploitability_from', None):
-            print("exploitability_from:", query_dict['exploitability_from'])
             object_list = object_list.filter(exploitability__gte=query_dict['exploitability_from'])
         if query_dict.get('exploitability_to', None):
-            print("exploitability_to:", query_dict['exploitability_to'])
             object_list = object_list.filter(exploitability__lte=query_dict['exploitability_to'])
 
         # By Danger
         if query_dict.get('danger_from', None):
-            print("danger_from:", query_dict['danger_from'])
             object_list = object_list.filter(danger__gte=query_dict['danger_from'])
         if query_dict.get('danger_to', None):
-            print("danger_to:", query_dict['danger_to'])
             object_list = object_list.filter(danger__lte=query_dict['danger_to'])
 
         return object_list

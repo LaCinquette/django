@@ -97,7 +97,7 @@
             </table>
             {% endwith %}
             
-            <input type="submit" class="btn btn-primary btn-lg" value="Save">
+            <input type="submit" class="btn btn-primary btn-lg" value="Создать">
         </form>
     </div>
 </div>
@@ -105,15 +105,15 @@
 <script src="{% static 'reports/new/jquery.formset.js' %}"></script>
 <script type="text/javascript">
     $('.inputfiles').formset({
-        addText: 'add input file',
-        deleteText: 'remove',
+        addText: 'Добавить файл входных данных',
+        deleteText: 'Удалить',
         prefix: 'inputfiles_set'
     });
 </script>
 <script type="text/javascript">
     $('.dumpfiles').formset({
-        addText: 'add dump file',
-        deleteText: 'remove',
+        addText: 'Добавить файл дампа памяти',
+        deleteText: 'Удалить',
         prefix: 'dumpfiles_set'
     });
 </script>
