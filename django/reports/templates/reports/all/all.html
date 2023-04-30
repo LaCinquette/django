@@ -1,0 +1,94 @@
+{% extends 'reports/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-content-center">
+    <div class="row border border-primary rounded m-3 p-3">
+        <h1>All reports</h1>
+        <div class="list-group">
+            {% for report in object_list %}
+                <a href="{% url 'report' report_id=report.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{ report.title }}</h5>
+                      <small class="text-muted">CWE-{{ report.cwe }}</small>
+                    </div>
+                    <label class="text-muted" for="description{{ report.id }}">Description:</label>
+                    <p class="mb-1" id="description{{ report.id }}">{{ report.description|truncatewords:20 }}</p>
+                    <div class="d-flex w-100 justify-content-start">
+                        <label class="pr-3" for="Danger{{ report.id }}" style="margin-right: 1rem;">Danger:</label>
+                        <span class="text-primary font-weight-bold" id="Danger{{ report.id }}">{{ report.danger }}</span>
+                    </div>
+                    <div class="d-flex w-100 justify-content-start">
+                        <label class="pr-3" for="exploitability{{ report.id }}" style="margin-right: 1rem;">Exploitability:</label>
+                        <span class="text-primary font-weight-bold" id="exploitability{{ report.id }}">{{ report.exploitability }}</span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        <div class="container mt-3 ml-0 pl-0">
+            <nav aria-label="Pagination" class="ml-0 pl-0">
+                <ul class="pagination" class="ml-0 pl-0">
+                    {% if page_obj.has_previous %}
+                    {% if page_obj.previous_page_number != 1 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page=1" tabindex="-1">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+                    </li>
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page={{ page_obj.number }}">Next</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="?page={{ page_obj.number }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

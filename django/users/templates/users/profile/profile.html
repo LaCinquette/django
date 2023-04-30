@@ -1,0 +1,112 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'users/profile/styles.css' %}">
+<script src="{% static 'users/profile/script.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="main-body">
+
+        <!-- Breadcrumb -->
+        <!-- <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'profile' %}">New report</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'profile' %}">All reports</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'profile' %}">Search</a></li>
+            </ol>
+        </nav> -->
+        <!-- /Breadcrumb -->
+
+        <div class="row gutters-sm">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Имя</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.first_name }} 
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Фамилия</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.last_name }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Отчество</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.profile.patronymic }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.email }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Телефон</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.profile.phone_number }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Дата рождения</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{ user.profile.born|date }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank"
+                                    href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Change password
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank"
+                                    href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank"
+                                    href="{% url 'logout' %}">Выйти</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

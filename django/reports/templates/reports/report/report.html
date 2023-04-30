@@ -1,0 +1,75 @@
+{% extends 'reports/base.html' %}
+
+{% load filename %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-content-center">
+    <div class="row border border-primary rounded m-3 p-3">
+        <h1>Report id: {{ report.id  }}</h1>
+        <div class="container w-100 mt-5">
+            <a href="{% url 'report' report_id=report.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between mb-2">
+                  <h2 class="mb-1">{{ report.title }}</h2>
+                  <small class="text-muted"><h2>CWE-{{ report.cwe }}</h2></small>
+                </div>
+                <div class="d-flex w-100 justify-content-start">
+                    <label class="pr-3" for="Danger{{ report.id }}" style="margin-right: 1rem;"><h4>Danger:</h4></label>
+                    <span class="text-primary font-weight-bold" id="Danger{{ report.id }}"><h4>{{ report.danger }}</h4></span>
+                </div>
+                <div class="d-flex w-100 justify-content-start mb-2">
+                    <label class="pr-3" for="exploitability{{ report.id }}" style="margin-right: 1rem;"><h4>Exploitability:</h4></label>
+                    <span class="text-primary font-weight-bold" id="exploitability{{ report.id }}"><h4>{{ report.exploitability }}</h4></span>
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="description{{ report.id }}"><h3>Description:</h3></label>
+                    <p class="mb-1" id="description{{ report.id }}">{{ report.description|linebreaks }}</p>
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="exploitation{{ report.id }}"><h3>Exploitation:</h3></label>
+                    <p class="mb-1" id="exploitation{{ report.id }}">{{ report.exploitation|linebreaks }}</p>
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="software{{ report.id }}"><h3>Software:</h3></label>
+                    <a class="mb-1 text-primary font-weight-bold" id="software{{ report.id }}" href="{% url 'software' software_id=report.software.id %}">{{ report.software.id }}</a>
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="environment{{ report.id }}"><h3>Environments:</h3></label>
+                    {% for environment in report.environments.all %}
+                    {% if forloop.first %}
+                    <br>
+                    {% endif %}
+                    <a class="mb-1 text-primary font-weight-bold" id="environment{{ report.id }}" href="{% url 'environment' environment_id=environment.id %}">{{ environment.id }}</a>
+                    <br>
+                    {% endfor %}
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="inputfiles{{ report.id }}"><h3>Input files:</h3></label>
+                    {% for file in report.inputfiles_set.all %}
+                    <p><a class="mb-0 pb-0 text-primary font-weight-bold" id="inputfiles{{ report.id }}" href="{{ file.upload.url }}">{{ file.upload|filename }}</a></p>
+                    {% endfor %}
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="text-muted" for="dumpfiles{{ report.id }}"><h3>Dump files:</h3></label>
+                    {% for file in report.dumpfiles_set.all %}
+                    <p><a class="mb-0 pb-0 text-primary font-weight-bold" id="dumpfiles{{ report.id }}" href="{{ file.upload.url }}">{{ file.upload|filename }}</a></p>
+                    {% endfor %}
+                </div>
+                <div class="w-100 mb-2 mt-5">
+                    <label class="mb-1" for="updated{{ report.id }}">Updated at:</label>
+                    <small class="text-muted" id="updated{{ report.id }}">{{ report.updated }}</small>
+                </div>
+                <div class="w-100 mb-2">
+                    <label class="mb-1" for="created{{ report.id }}">Created at:</label>
+                    <small class="text-muted" id="created{{ report.id }}">{{ report.created }}</small>
+                </div>
+            </a>
+            {% if request.user == report.owner or request.user.is_staff %}
+            <div class="btn-group mt-3">
+                <a href="{% url 'report_update' report_id=report.id %}" class="btn btn-primary">Изменить</a>
+                <a href="{% url 'report_delete' report_id=report.id %}" class="btn btn-danger">Удалить</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
