@@ -8,6 +8,7 @@ from .models import Environment
 from .forms import EnvironmentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 class EnvironmentsMenu(TemplateView):
     template_name = "environments/menu/menu.html"
@@ -41,6 +42,14 @@ class EnvironmentDelete(UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('all_environments')
     pk_url_kwarg = 'environment_id'
     template_name = 'environments/delete/delete.html'
+
+    def form_valid(self, form):
+        obj = self.get_object()
+        if obj.report_set.all():
+            messages.error(self.request, "Данная сущность имеет связанные с ней отчеты, невозможно удалить")
+            return super().form_invalid(form)
+        else:
+            return super().form_valid(form)
 
     def test_func(self):
         obj = self.get_object()
