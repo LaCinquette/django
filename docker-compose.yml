@@ -5,8 +5,6 @@ services:
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
     expose:
       - 8000
-    # ports:
-    #   - 8000:8000
     volumes:
       - static:/home/app/web/static
       - media:/home/app/web/media
@@ -20,6 +18,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./postgresql/.env.prod
+    ports:
+      - 5555:5432
   nginx:
     build: ./nginx
     volumes:

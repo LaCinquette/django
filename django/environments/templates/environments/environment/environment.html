@@ -1,9 +1,11 @@
 {% extends 'environments/base.html' %}
 
+{% block title %}СВ{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
-        <h1>Среда исполнения №{{ environment.id  }}</h1>
+        <h1>Среда выполнения №{{ environment.id  }}</h1>
         <div class="container w-100">
             <a href="{% url 'environment' environment_id=environment.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">

@@ -13,7 +13,7 @@ class Report(models.Model):
     cwe            = models.IntegerField(blank=False, verbose_name="Номер CWE")
     description    = models.TextField(blank=False, verbose_name="Описание")
     software       = models.ForeignKey(Software, on_delete=models.PROTECT, unique=False, blank=False, verbose_name="ПО")
-    environments   = models.ManyToManyField(Environment, verbose_name="Среды исполнения", blank=False)
+    environments   = models.ManyToManyField(Environment, verbose_name="Среды выполнения", blank=False)
     exploitability = models.PositiveSmallIntegerField(default=10, blank=False, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name="Эксплуатабельность")
     danger         = models.PositiveSmallIntegerField(default=10, blank=False, validators=[MinValueValidator(0), MaxValueValidator(10)], verbose_name="Опасность")
     exploitation   = models.TextField(blank=False, default='Нет', verbose_name="Способ эксплуатации")

@@ -1,9 +1,11 @@
 {% extends 'environments/base.html' %}
 
+{% block title %}Все СВ{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
-        <h1>Все среды исполнения:</h1>
+        <h1>Все среды выполнения:</h1>
         <div class="list-group">
             {% for environment in object_list %}
             <a href="{% url 'environment' environment_id=environment.id %}"

@@ -268,7 +268,7 @@ class SearchResultsList(ListView):
         # request.pat
         if (not param_dict):
             # print(request.path)
-            messages.error(self.request, 'No parameters provided!')
+            messages.error(self.request, 'Не указаны параметры')
             self.object_list = Report.objects.none()
             ctx = self.get_context_data(**kwargs)
             ctx['params'] = False

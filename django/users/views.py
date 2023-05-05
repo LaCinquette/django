@@ -8,7 +8,6 @@ from django.views.generic import ListView, DetailView, CreateView
 from users.forms import LoginUserForm
 from django.contrib.auth.models import User
 
-
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'users/auth/login.html'

@@ -1,5 +1,7 @@
 {% extends 'reports/base.html' %}
 
+{% block title %}Отчет{% endblock %}
+
 {% load filename %}
 
 {% block content %}
@@ -30,15 +32,15 @@
                 </div>
                 <div class="w-100 mb-2">
                     <label class="text-muted" for="software{{ report.id }}"><h3>ПО:</h3></label>
-                    <a class="mb-1 text-primary font-weight-bold" id="software{{ report.id }}" href="{% url 'software' software_id=report.software.id %}">{{ report.software.id }}</a>
+                    <a class="mb-1 text-primary font-weight-bold" id="software{{ report.id }}" href="{% url 'software' software_id=report.software.id %}">{{ report.software }}</a>
                 </div>
                 <div class="w-100 mb-2">
-                    <label class="text-muted" for="environment{{ report.id }}"><h3>Среды исполнения:</h3></label>
+                    <label class="text-muted" for="environment{{ report.id }}"><h3>Среды выполнения:</h3></label>
                     {% for environment in report.environments.all %}
                     {% if forloop.first %}
                     <br>
                     {% endif %}
-                    <a class="mb-1 text-primary font-weight-bold" id="environment{{ report.id }}" href="{% url 'environment' environment_id=environment.id %}">{{ environment.id }}</a>
+                    <a class="mb-1 text-primary font-weight-bold" id="environment{{ report.id }}" href="{% url 'environment' environment_id=environment.id %}">{{ environment }}</a>
                     <br>
                     {% endfor %}
                 </div>

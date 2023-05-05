@@ -1,5 +1,7 @@
 {% extends 'software/base.html' %}
 
+{% block title %}Меню отчетов{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-center align-content-center">
     <div class="row border border-primary rounded m-3 p-3">
@@ -9,6 +11,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'all_reports' %}">Смотреть все</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'search' %}">Искать</a>
             </li>
           </ul>
     </div>

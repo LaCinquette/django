@@ -20,6 +20,12 @@ class Software(models.Model):
     def get_absolute_url(self):
         return reverse('software', kwargs={'software_id': self.pk})
     
+    def __str__(self):
+        if self.build_options:
+            return self.title + " " + self.version + " (" + self.build_options + ")"
+        else:
+            return self.title + " " + self.version
+    
     # class Meta:
     #     constraints = [
     #         models.UniqueConstraint(fields=['category', 'title', 'version', 'build_options'], name='unique_row_software')
