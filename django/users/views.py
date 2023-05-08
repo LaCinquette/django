@@ -44,5 +44,5 @@ def logout_user(request):
 def view_404(request, exception):
     print('Logged in:', request.user.is_authenticated)
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('login')) # redirect('login')
-    return HttpResponseRedirect(reverse('profile')) # redirect('profile')
+        return HttpResponseRedirect(reverse('login'))
+    return HttpResponseRedirect(reverse('profile'))
