@@ -1,11 +1,10 @@
-from django.shortcuts import redirect
 import re
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 
 
-class RequireLoginMiddleware(object):
+class RequireLoginMiddleware:
     
     def __init__(self, response):
         self.get_response = response
