@@ -9,7 +9,7 @@ class RequireLoginMiddleware:
     def __init__(self, response):
         self.get_response = response
         self.required = tuple(re.compile(url) for url in settings.AUTH_URLS)
-        self.exceptions = tuple(re.compile(url)for url in settings.NO_AUTH_URLS)
+        self.exceptions = tuple(re.compile(url) for url in settings.NO_AUTH_URLS)
 
     def __call__(self, request):
         
