@@ -45,3 +45,6 @@ def view_404(request, exception):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
     return HttpResponseRedirect(reverse('profile'))
+
+
+
