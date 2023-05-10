@@ -16,15 +16,26 @@ class Environment(models.Model):
         ANY     = 'N', _('Any OS')
         OTHER   = 'O', _('Other')
 
-    owner   = models.ForeignKey(User, on_delete=models.CASCADE)
-    os      = models.CharField(max_length=1, choices=OS.choices, blank=False, default='O', verbose_name="ОС")
-    version = models.CharField(max_length=256, blank=True, verbose_name="Версия")
+    owner   = models.ForeignKey(User, 
+                                on_delete=models.CASCADE)
+    
+    os      = models.CharField(max_length=1, 
+                               choices=OS.choices, 
+                               blank=False, 
+                               default='O', 
+                               verbose_name="ОС")
+    
+    version = models.CharField(max_length=256, 
+                               blank=True, 
+                               verbose_name="Версия")
 
     def get_absolute_url(self):
         return reverse('environment', kwargs={'environment_id': self.pk})
     
     def __str__(self):
         return self.get_os_display() + " " + self.version
+    
+
     
     # class Meta:
     #     constraints = [
