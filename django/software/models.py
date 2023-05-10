@@ -36,10 +36,12 @@ class Software(models.Model):
         return reverse('software', kwargs={'software_id': self.pk})
     
     def __str__(self):
+        name  = self.title + " " + self.version
+        
         if self.build_options:
-            return self.title + " " + self.version + " (" + self.build_options + ")"
-        else:
-            return self.title + " " + self.version
+            name = name + " (" + self.build_options + ")"
+        
+        return name
     
     # class Meta:
     #     constraints = [
