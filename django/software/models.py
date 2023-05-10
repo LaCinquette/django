@@ -11,11 +11,26 @@ class Software(models.Model):
         LIBRARY     = 'L', _('Библиотека')
         APPLICATION = 'A', _('Приложение')
 
-    owner         = models.ForeignKey(User, on_delete=models.CASCADE)
-    category      = models.CharField(max_length=1, blank=False, choices=Categories.choices, default='A', verbose_name="Категория")
-    title         = models.CharField(max_length=100, blank=False, verbose_name="Название")
-    version       = models.CharField(max_length=100, blank=False, default='Unknown', verbose_name="Версия")
-    build_options = models.TextField(blank=True, verbose_name="Опции сборки")
+    owner         = models.ForeignKey(User, 
+                                      on_delete=models.CASCADE)
+    
+    category      = models.CharField(max_length=1, 
+                                     blank=False, 
+                                     choices=Categories.choices, 
+                                     default='A', 
+                                     verbose_name="Категория")
+    
+    title         = models.CharField(max_length=100, 
+                                     blank=False, 
+                                     verbose_name="Название")
+    
+    version       = models.CharField(max_length=100, 
+                                     blank=False, 
+                                     default='Unknown', 
+                                     verbose_name="Версия")
+    
+    build_options = models.TextField(blank=True, 
+                                     verbose_name="Опции сборки")
 
     def get_absolute_url(self):
         return reverse('software', kwargs={'software_id': self.pk})
