@@ -16,7 +16,9 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic --no-input --clear
 
-if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ]
+if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && \
+   [ -n "$DJANGO_SUPERUSER_PASSWORD" ] && \
+   [ -n "$DJANGO_SUPERUSER_EMAIL" ]
 then
     python manage.py createsuperuser --no-input
 fi
