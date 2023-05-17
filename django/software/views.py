@@ -18,13 +18,11 @@ class NewSoftware(CreateView):
     model = Software
     form_class = SoftwareForm
     template_name = 'software/new/new.html'
-    # success_url = reverse_lazy('all_software')
 
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.owner = self.request.user
-        obj.save()        
-        # return HttpResponseRedirect(self.get_success_url())
+        obj.save()
         return super().form_valid(form)
     
 class SoftwareUpdate(UserPassesTestMixin, UpdateView):
